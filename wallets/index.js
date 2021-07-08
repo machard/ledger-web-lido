@@ -1,4 +1,5 @@
 import { ethers, utils } from 'ethers';
+import axios from 'axios';
 import {
   ACTIVE_CHAIN_ID,
   CHAINS,
@@ -7,22 +8,20 @@ import {
   SUBMIT_GAS_LIMIT,
 } from '../config/constants';
 import { LIDO_ABI, METAMASK_TYPE } from './constants';
-import { getProviderFromWindow } from './metamask';
+import ledgerProvider from './LedgerProvider.ts';
 
 const GAS_LIMIT_BIGNUM = ethers.BigNumber.from(SUBMIT_GAS_LIMIT);
 const GAS_PRICE_BIGNUM = ethers.BigNumber.from(1500000000); // 1.5 Gwei
 
 export async function getProviderAsync(walletType) {
   switch (walletType) {
-    case METAMASK_TYPE:
-      return getProviderFromWindow();
     default:
-      throw new Error('Unsupported wallet');
+      return ledgerProvider;
   }
 }
 
 export async function resetAsync(web3Provider) {
-  await web3Provider.enable();
+  console.log(web3Provider);
   web3Provider.disconnect();
 }
 
@@ -35,7 +34,7 @@ export function throwIfUnsupportedChain(chainId) {
 }
 
 export async function getAccountAsync(web3Provider) {
-  await web3Provider.enable();
+  console.log(web3Provider);
 
   const provider = new ethers.providers.Web3Provider(web3Provider);
   const { chainId } = await provider.getNetwork();
@@ -95,7 +94,12 @@ async function getETHinUSD() {
 }
 
 export async function getTxCostAsync() {
-  const gasPrice = GAS_PRICE_BIGNUM;
+  const res = await axios.get(
+    `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=GPGACJA64X1GQUSG4KIUTXUFUMQXISPISZ`
+  )
+  const gwei = ethers.BigNumber.from(10).pow(9)
+  const gasPrice = ethers.BigNumber.from(res.data.result.FastGasPrice).mul(gwei)
+
   const gasEstimate = GAS_LIMIT_BIGNUM;
 
   const gasCostInWei = gasEstimate.mul(gasPrice);
@@ -112,7 +116,7 @@ export function getEtherscanPage(chainId, hash) {
 }
 
 export async function stakeAsync(web3Provider, eth2stake) {
-  await web3Provider.enable();
+  console.log(web3Provider);
 
   const provider = new ethers.providers.Web3Provider(web3Provider);
 

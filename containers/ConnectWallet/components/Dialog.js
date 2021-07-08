@@ -129,8 +129,7 @@ function Dialog({ getWalletInfo, pending, open, onClose, resetWallet }) {
                 button
                 onClick={() => handleClick(type)}
               >
-                {name}
-                <Icon className={classes.icon} />
+                Ledger Web
               </ListItem>
             ))
           )}
