@@ -8,7 +8,7 @@ import {
   SUBMIT_GAS_LIMIT,
 } from '../config/constants';
 import { LIDO_ABI, METAMASK_TYPE } from './constants';
-import ledgerProvider from './LedgerProvider.ts';
+import ledgerProvider from './LedgerWebProvider.ts';
 
 const GAS_LIMIT_BIGNUM = ethers.BigNumber.from(SUBMIT_GAS_LIMIT);
 const GAS_PRICE_BIGNUM = ethers.BigNumber.from(1500000000); // 1.5 Gwei
