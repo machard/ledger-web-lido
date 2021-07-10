@@ -16,12 +16,11 @@ const GAS_PRICE_BIGNUM = ethers.BigNumber.from(1500000000); // 1.5 Gwei
 export async function getProviderAsync(walletType) {
   switch (walletType) {
     default:
-      return ledgerProvider;
+      return ledgerProvider();
   }
 }
 
 export async function resetAsync(web3Provider) {
-  console.log(web3Provider);
   web3Provider.disconnect();
 }
 

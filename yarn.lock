@@ -8500,6 +8500,17 @@ ledger-web-hw-transport@^1.0.0:
     ledger-web-client "1.0.0"
     uuid "^8.3.2"
 
+ledger-web-subprovider@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/ledger-web-subprovider/-/ledger-web-subprovider-1.0.2.tgz#6acc14939ae8f795088e35dcb67dc4bd29eedc10"
+  integrity sha512-oSNLsnKZuVv4eB7qhI2LEmAZ13mRXOzJKmSWfd1blVY3V5T8dra05KabjxYkgoxtMlKvItSNHViJfcVAVHboHw==
+  dependencies:
+    "@0x/subproviders" "^6.5.4"
+    "@ledgerhq/hw-app-eth" "^6.1.0"
+    ethers "^5.4.1"
+    ledger-web-client "^1.0.0"
+    ledger-web-hw-transport "^1.0.0"
+
 level-codec@^9.0.0:
   version "9.0.2"
   resolved "https://registry.yarnpkg.com/level-codec/-/level-codec-9.0.2.tgz#fd60df8c64786a80d44e63423096ffead63d8cbc"
